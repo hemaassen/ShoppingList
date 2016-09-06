@@ -66,7 +66,4 @@ public class ShoppingMemoDataSource {
         return shoppingMemo;
     }
 
-
-
-
 }
