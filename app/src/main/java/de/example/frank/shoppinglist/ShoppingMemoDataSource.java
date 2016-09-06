@@ -16,4 +16,15 @@ public class ShoppingMemoDataSource {
         Log.d(LOG_TAG, " Der Helper wird erzeugt.");
         helper = new ShoppingMemoDbHelper(con);
     }
+
+    public void open(){
+        Log.d(LOG_TAG,"Eine Referenz wird angefragt");
+        db = helper.getWritableDatabase();
+        Log.d(LOG_TAG,"Pfad zur DB " + db.getPath());
+    }
+
+    public void close(){
+        helper.close();
+        Log.d(LOG_TAG,"Datenbank wieder geschlossen");
+    }
 }

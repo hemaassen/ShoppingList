@@ -23,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
         ShoppingMemo testMemo = new ShoppingMemo("Golf", 5,105);
         Log.d(LOG_TAG, "Inhalt Main" + testMemo.toString());
         dataSource = new ShoppingMemoDataSource(this);
-
-
+        Log.d(LOG_TAG,"Quelle wird geoeffnet");
+        dataSource.open();
+        Log.d(LOG_TAG,"Quelle wird geschlossen");
+        dataSource.close();
     }
 
 
