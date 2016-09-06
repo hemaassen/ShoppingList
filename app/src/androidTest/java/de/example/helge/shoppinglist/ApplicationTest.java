@@ -1,4 +1,4 @@
-package de.example.frank.shoppinglist;
+package de.example.helge.shoppinglist;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
