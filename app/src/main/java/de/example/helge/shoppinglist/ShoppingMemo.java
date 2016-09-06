@@ -13,6 +13,8 @@ public class ShoppingMemo {
 
     }
 
+
+
     public ShoppingMemo(String product, int quantity, long id) {
         this.product = product;
         this.quantity = quantity;
