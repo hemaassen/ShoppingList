@@ -219,8 +219,6 @@ public class MainActivity extends AppCompatActivity {
                                 product, quantity);
                         showAllListEntries();
                         dialogInterface.dismiss();
-
-
                     }
                 }).setNegativeButton(R.string.dialog_button_negative, new DialogInterface.OnClickListener() {
 
