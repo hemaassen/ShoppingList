@@ -32,11 +32,32 @@ public class MainActivity extends AppCompatActivity {
         ShoppingMemo testMemo = new ShoppingMemo("Golf", 5,105);
         Log.d(LOG_TAG, "Inhalt Main" + testMemo.toString());
         dataSource = new ShoppingMemoDataSource(this);
-        Log.d(LOG_TAG,"Quelle wird geoeffnet");
-        dataSource.open();
+//        Log.d(LOG_TAG,"Quelle wird geoeffnet");
+//        dataSource.open();
         activateAddButton();
 //        Log.d(LOG_TAG,"Quelle wird geschlossen");
 //        dataSource.close();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dataSource.open();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dataSource.close();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dataSource.close();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dataSource.open();
     }
 
     private void activateAddButton(){
@@ -58,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 int quant = Integer.parseInt(quantity);
+                editQuantity.setText("");
                 editProduct.setText("");
-                editProduct.setText("");
+
                 dataSource.createShoppingMemo(product, quant);
 
                 InputMethodManager inputMethodManager;
@@ -68,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
                 }
                 showAllListEntries();
-                dataSource.close();
+//                dataSource.close();
             }
         });
     }

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ShoppingList</string>
 
-    <string name="hello_world">Hello world!</string>
+    <!--<string name="hello_world">Hello world!</string>-->
     <string name="action_settings">Settings</string>
 
     <string name="editText_hint_quantity">Anzahl</string>
@@ -10,7 +10,7 @@
 
     <string name="editText_errorMessage">Das Feld darf nicht leer sein.</string>
 
-
+    <string name="delete">Eintrag löschen</string>
 
 
 </resources>
