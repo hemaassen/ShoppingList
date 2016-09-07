@@ -17,7 +17,7 @@
     <string name="dialog_title">Eintrag bearbeiten</string>
     <string name="dialog_title_quantity">Anzahl</string>
     <string name="dialog_title_product">Produkt</string>
-    <string name="dialog_button_positive">Weiter</string>
+    <string name="dialog_button_positive">Ändern</string>
     <string name="dialog_button_negative">Abrechen</string>
 
 
