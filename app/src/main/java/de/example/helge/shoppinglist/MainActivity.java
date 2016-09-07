@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,8 +38,60 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d(LOG_TAG,"Quelle wird geoeffnet");
 //        dataSource.open();
         activateAddButton();
+        initializeContextualActionBar();
 //        Log.d(LOG_TAG,"Quelle wird geschlossen");
 //        dataSource.close();
+    }
+
+    private void initializeContextualActionBar() {
+        final ListView shoppingMemoListView = (ListView)findViewById(R.id.listview_shopping_memos);
+        shoppingMemoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        shoppingMemoListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
+            @Override
+            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                getMenuInflater().inflate(R.menu.menu_contextual_menu_bar, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.delete:
+                        SparseBooleanArray touchedMemoPosition = shoppingMemoListView.getCheckedItemPositions();
+                        for(int i=0;i<touchedMemoPosition.size();i++) {
+                            boolean isCheckd = touchedMemoPosition.valueAt(i);
+                            if(isCheckd) {
+                                int posInListView = touchedMemoPosition.keyAt(i);
+                                ShoppingMemo memo = (ShoppingMemo) shoppingMemoListView.
+                                        getItemAtPosition(posInListView);
+                                dataSource.deleteShoppingMemo(memo);
+                            }
+                        }
+                        showAllListEntries();
+                        actionMode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode actionMode) {
+
+            }
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+
+            }
+        });
     }
 
     @Override
